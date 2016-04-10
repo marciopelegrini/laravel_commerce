@@ -13,8 +13,6 @@
 
 Route::get('categories','CategoriesController@index');
 
-
-
 Route::get('/', function () {
     return view('welcome');
 });
