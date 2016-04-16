@@ -5,3 +5,5 @@ Homestead.json
 .env
 .idea
 sync.ffs_db
+/nbproject/private/
+/nbproject
