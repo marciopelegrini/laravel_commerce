@@ -11,6 +11,15 @@
 |
 */
 
+/* Fase 3 */
+Route::group(['prefix'=>'admin'], function() {
+    
+    Route::get('products','AdminProducts@index');
+    
+    Route::get('categories','AdminCategories@index'); 
+    
+});
+
 Route::get('categories','CategoriesController@index');
 
 Route::get('/', function () {
