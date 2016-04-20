@@ -2,6 +2,6 @@
 
 <ul>
     @foreach($products as $product)
-        <li>{{ $product->name }} - R$ {{ $product->price }}</li>
+        <li>{{ $product->name }} - {{ $product->description }} - R$ {{ $product->price }} - {{ $product->featured }}</li>
     @endforeach
-</ul>/
+</ul>
