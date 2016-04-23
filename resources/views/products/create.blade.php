@@ -27,14 +27,14 @@
                 {!! Form::text('price', null, ['class'=>'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('featured', 'Featured:') !!}<br/>
-                Yes {!! Form::radio('featured', 'true', ['class'=>'form-control']) !!}
-                No {!! Form::radio('featured', 'false', ['class'=>'form-control']) !!}
+                {!! Form::label('featured', 'Featured: ') !!}
+                {!! Form::radio('featured', 1,  ['class' => 'field']) !!} YES
+                {!! Form::radio('featured', 0,  ['class' => 'field']) !!} NO
             </div>
             <div class="form-group">
-                {!! Form::label('recommend', 'Recommend:') !!}<br/>
-                Yes {!! Form::radio('recommend', 'true', ['class'=>'form-control']) !!}
-                No {!! Form::radio('recommend', 'false', ['class'=>'form-control']) !!}
+                {!! Form::label('recommend', 'Recommend: ') !!}
+                {!! Form::radio('recommend', 1,  ['class' => 'field']) !!} YES
+                {!! Form::radio('recommend', 0,  ['class' => 'field']) !!} NO
             </div>
             <div class="form-group">
                 {!! Form::submit('Create Product', ['class'=>'btn btn-primary']) !!}

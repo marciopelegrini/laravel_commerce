@@ -12,7 +12,7 @@
             </ul>
         @endif
 
-        {!! Form::open(['route'=>'products.store']) !!}
+        {!! Form::open(['route'=>['products.update',$products->id], 'method'=>'put']) !!}
 
             <div class="form-group">
                 {!! Form::label('name', 'Name:') !!}
@@ -26,16 +26,16 @@
                 {!! Form::label('price', 'Price:') !!}
                 {!! Form::text('price', $products->price, ['class'=>'form-control']) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('featured', 'Featured:') !!}<br/>
-                Yes {!! Form::radio('featured', 'true', ['class'=>'form-control']) !!}
-                No {!! Form::radio('featured', 'false', ['class'=>'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('recommend', 'Recommend:') !!}<br/>
-                Yes {!! Form::radio('recommend', 'true', ['class'=>'form-control']) !!}
-                No {!! Form::radio('recommend', 'false', ['class'=>'form-control']) !!}
-            </div>
+        <div class="form-group">
+            {!! Form::label('featured', 'Featured: ') !!}
+            {!! Form::radio('featured', 1, ($products->featured) ? true : false, ['class' => 'field']) !!} YES
+            {!! Form::radio('featured', 0, (!$products->featured) ? true : false, ['class' => 'field']) !!} NO
+        </div>
+        <div class="form-group">
+            {!! Form::label('recommend', 'Recommend: ') !!}
+            {!! Form::radio('recommend', 1, ($products->recommend) ? true : false, ['class' => 'field']) !!} YES
+            {!! Form::radio('recommend', 0, ($products->recommend) ? false : true, ['class' => 'field']) !!} NO
+        </div>
             <div class="form-group">
                 {!! Form::submit('Save Product', ['class'=>'btn btn-primary']) !!}
             </div>

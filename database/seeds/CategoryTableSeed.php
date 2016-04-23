@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use CodeCommerce\Category;
 use Faker\Factory as Faker;
 
-class CategoryTableSeed extends \Illuminate\Database\Seeder
+class CategoryTableSeed extends Seeder
 {
     public function run(){
         DB::table('categories')->truncate();

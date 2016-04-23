@@ -26,3 +26,13 @@ $factory->define(CodeCommerce\Category::class, function (Faker\Generator $faker)
         'description' => $faker->sentence
     ];
 });
+
+$factory->define(CodeCommerce\Product::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'description' => $faker->sentence,
+        'price' => $faker->numberBetween(100, 5000),
+        'featured' => $faker->boolean(50),
+        'recommend' => $faker->boolean(50)
+    ];
+});
