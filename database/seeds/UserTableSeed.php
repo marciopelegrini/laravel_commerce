@@ -19,7 +19,7 @@ class UserTableSeed extends Seeder
         factory('CodeCommerce\User')->create([
             'name' => 'Marcio',
             'email' => 'marcio.pelegrini@gmail.com',
-            'password' => Hash::make('mar68012')
+            'password' => Hash::make('123')
         ]);
 
         factory('CodeCommerce\User', 10)->create();

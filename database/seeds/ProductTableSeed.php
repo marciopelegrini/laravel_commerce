@@ -15,5 +15,4 @@ class ProductTableSeed extends Seeder
         DB::table('products')->truncate();
         factory('CodeCommerce\Product',15)->create();
     }
-
 }
