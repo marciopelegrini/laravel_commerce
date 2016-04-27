@@ -18,5 +18,4 @@ class CategoryTableSeed extends Seeder
         DB::table('categories')->truncate();
         factory('CodeCommerce\Category',15)->create();
     }
-
 }
