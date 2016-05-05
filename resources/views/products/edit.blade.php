@@ -41,6 +41,10 @@
             {!! Form::radio('recommend', 1, ($products->recommend) ? true : false, ['class' => 'field']) !!} YES
             {!! Form::radio('recommend', 0, ($products->recommend) ? false : true, ['class' => 'field']) !!} NO
         </div>
+        <div class="form-group">
+            {!! Form::label('tags', 'Tags:') !!}
+            {!! Form::textarea('tags', $products->tagList, ['class'=>'form-control']) !!}
+        </div>
             <div class="form-group">
                 {!! Form::submit('Save Product', ['class'=>'btn btn-primary']) !!}
             </div>

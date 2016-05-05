@@ -5,6 +5,7 @@ namespace CodeCommerce\Http\Controllers;
 use CodeCommerce\Category;
 use CodeCommerce\Product;
 use CodeCommerce\ProductImage;
+use CodeCommerce\Tag;
 use Illuminate\Http\Request;
 
 use CodeCommerce\Http\Requests;
@@ -14,10 +15,12 @@ use Illuminate\Support\Facades\Storage;
 class ProductsController extends Controller
 {
     private $productModel;
+    private $tagModel;
 
-    public function __construct(Product $productModel)
+    public function __construct(Product $productModel, Tag $tag)
     {
         $this->productModel = $productModel;
+        $this->tagModel = $tag;
     }
 
     public function index(){
@@ -31,24 +34,44 @@ class ProductsController extends Controller
         return view('products.create', compact('categories'));
     }
     
-    public function store(Requests\ProductsRequest $request){
-        $input = $request->all();
-        $products = $this->productModel->fill($input);
+    public function store(Requests\ProductsRequest $request, Tag $tag){
+        $tags = explode(',', trim($request->input('tags')));
+        $idTags = [];
+        foreach ($tags as $key => $value) {
+            $newTag = $tag->firstOrCreate(["name" => $value]);
+            $idTags[] = $newTag->id;
+        }
+
+        $products = $this->productModel->fill($request->all());
         $products->save();
-        return redirect()->route('products');
+        $products->tags()->sync($idTags);
+        return redirect()
+            ->route('products')
+            ->withFlashMessage('Product Created');
     }
 
     public function edit($id, Category $category)
     {
-        $categories = $category->lists('name', 'id');
         $products = $this->productModel->find($id);
-        return view('products.edit',compact('products', 'categories'));
+        $categories = $category->lists('name', 'id');
+
+        return view('products.edit',compact('products', 'categories', 'tags'));
     }
 
-    public function update(Requests\CategoryRequest $request, $id)
+    public function update(Requests\CategoryRequest $request, $id, Tag $tag)
     {
-        $this->productModel->find($id)->update($request->all());
-        return redirect()->route('products');
+        $tags = explode(',', trim($request->input('tags')));
+        $idTags = [];
+        foreach ($tags as $key => $value) {
+            $newTag = $tag->firstOrCreate(["name" => $value]);
+            $idTags[] = $newTag->id;
+        }
+
+        $products = $this->productModel->find($id);
+        $products->update($request->all());
+        $products->tags()->sync($idTags);
+
+        return redirect()->route('products')->withFlashMessage('Product Updated');
     }
 
     public function destroy($id)
@@ -81,7 +104,7 @@ class ProductsController extends Controller
     public function destroyImage(ProductImage $productImage, $id) {
         $image = $productImage->find($id);
 
-        if (file_exists(public_path().'/uploads/'.$image->extension)){
+        if(file_exists(public_path('uploads\\').$image->id.'.'.$image->extension)){
             Storage::disk('public_local')->delete($image->id.'.'.$image->extension);
         }
 
@@ -89,6 +112,5 @@ class ProductsController extends Controller
         $image->delete();
 
         return redirect()->route('products.images',['id'=>$product->id]);
-
     }
 }
