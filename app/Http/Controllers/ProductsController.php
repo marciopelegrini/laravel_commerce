@@ -35,7 +35,8 @@ class ProductsController extends Controller
     }
     
     public function store(Requests\ProductsRequest $request, Tag $tag){
-        $tags = explode(',', trim($request->input('tags')));
+        $tags = explode(',', $request->input('tags'));
+        $tags = array_map('trim', $tags);
         $idTags = [];
         foreach ($tags as $key => $value) {
             $newTag = $tag->firstOrCreate(["name" => $value]);
@@ -60,7 +61,8 @@ class ProductsController extends Controller
 
     public function update(Requests\CategoryRequest $request, $id, Tag $tag)
     {
-        $tags = explode(',', trim($request->input('tags')));
+        $tags = explode(',', $request->input('tags'));
+        $tags = array_map('trim', $tags);
         $idTags = [];
         foreach ($tags as $key => $value) {
             $newTag = $tag->firstOrCreate(["name" => $value]);
