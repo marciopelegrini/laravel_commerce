@@ -41,12 +41,10 @@ Route::group(['prefix'=>'admin', 'where'=>['id' => '[0-9]+']], function() {
     });
 });
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('exemplo','My_Controller@exemplo');
+// Rotas da loja
+Route::get('/', ['as' => 'store.index', 'uses' => 'StoreController@index']);
+Route::get('category/{id}', ['as' => 'store.category', 'uses' => 'StoreController@category']);
+Route::get('product/{id}', ['as' => 'store.product', 'uses' => 'StoreController@product']);
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

@@ -6,3 +6,6 @@ Homestead.json
 .idea
 sync.ffs_db
 /nbproject
+/public/uploads
+/public/images
+!/public/images/no-img.jpg

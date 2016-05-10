@@ -46,9 +46,7 @@ class ProductsController extends Controller
         $products = $this->productModel->fill($request->all());
         $products->save();
         $products->tags()->sync($idTags);
-        return redirect()
-            ->route('products')
-            ->withFlashMessage('Product Created');
+        return redirect()->route('products');
     }
 
     public function edit($id, Category $category)
