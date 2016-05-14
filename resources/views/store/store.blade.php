@@ -65,7 +65,8 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -99,8 +100,6 @@
     </div><!--/header-bottom-->
 </header><!--/header-->
 
-
-
 <section>
     <div class="container">
         <div class="row">
@@ -121,11 +120,12 @@
 </section>
 
 <footer id="footer"><!--Footer-->
- <div class="footer-bottom">
+    <div class="footer-bottom">
         <div class="container">
             <div class="row">
                 <p class="pull-left">Copyright © <?php  echo date("Y"); ?> E-Shop Inc. All rights reserved.</p>
-                <p class="pull-right">Designed by <span><a target="_blank" href="http://invoinn.com/">InvoInn</a></span></p>
+                <p class="pull-right">Designed by <span><a target="_blank" href="http://invoinn.com/">InvoInn</a></span>
+                </p>
             </div>
         </div>
     </div>
