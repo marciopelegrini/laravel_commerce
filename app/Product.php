@@ -3,7 +3,6 @@
 namespace CodeCommerce;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -16,36 +15,44 @@ class Product extends Model
         "recommend"
     ];
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo('CodeCommerce\Category');
     }
 
-    public function images() {
+    public function images()
+    {
         return $this->hasMany('CodeCommerce\ProductImage');
     }
-    
-    public  function tags(){
+
+    public function tags()
+    {
         return $this->belongsToMany('CodeCommerce\Tag');
     }
 
-    public function getNameDescriptionAttribute(){
-        return $this->name." - ".$this->description;
+    public function getNameDescriptionAttribute()
+    {
+        return $this->name . " - " . $this->description;
     }
 
-    public function getTagListAttribute(){
+    public function getTagListAttribute()
+    {
         $tags = $this->tags->lists('name')->toArray();
         return implode(',', $tags);
     }
 
-    public function scopeFeatured($query){
-        return $query->where('featured','=',1)->limit(3);
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', '=', 1)->limit(3);
     }
 
-    public function scopeRecommend($query){
-        return $query->where('recommend','=',1)->limit(3);
+    public function scopeRecommend($query)
+    {
+        return $query->where('recommend', '=', 1)->limit(3);
     }
 
-    public function scopeOfCategory($query, $type) {
-        return $query->where('category_id','=',$type);
+    public function scopeOfCategory($query, $type)
+    {
+        return $query->where('category_id', '=', $type);
     }
 }
