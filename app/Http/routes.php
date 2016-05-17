@@ -12,7 +12,7 @@
 */
 
 /* Fase 3 */
-Route::group(['prefix'=>'admin', 'where'=>['id' => '[0-9]+']], function() {
+Route::group(['prefix'=>'admin', 'middleware'=>'auth_admin', 'where'=>['id' => '[0-9]+']], function() {
     Route::group(['prefix'=>'categories'], function() {
         /* CRUD Categories */
         Route::get('/',['as'=>'categories','uses'=>'CategoriesController@index']);
@@ -43,6 +43,7 @@ Route::group(['prefix'=>'admin', 'where'=>['id' => '[0-9]+']], function() {
 
 // Rotas da loja
 Route::get('/', ['as' => 'store.index', 'uses' => 'StoreController@index']);
+Route::get('/home', ['as' => 'store.index', 'uses' => 'StoreController@index']);
 Route::get('category/{id}', ['as' => 'store.category', 'uses' => 'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses' => 'StoreController@product']);
 Route::get('tag/{id}', ['as' => 'store.tag', 'uses' => 'StoreController@tag']);
@@ -51,7 +52,10 @@ Route::get('cart/add/{id}', ['as' => 'cart.add', 'uses' =>'CartController@add'])
 Route::get('cart/destroy/{id}', ['as' => 'cart.destroy', 'uses' =>'CartController@destroy']);
 Route::put('cart/update/{id}', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 
-
+// Rotas Cart
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+});
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
