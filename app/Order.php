@@ -6,17 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
         'user_id',
         'total',
         'status'
     ];
 
-    public function items() {
+    public function items()
+    {
         return $this->hasMany('CodeCommerce\OrderItem');
     }
-    
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo('CodeCommerce\User');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('CodeCommerce\OrderStatus');
     }
 }

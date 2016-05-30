@@ -55,8 +55,9 @@ Route::put('cart/update/{id}', ['as' => 'cart.update', 'uses' => 'CartController
 // Rotas Cart
 Route::group(['middleware'=>'auth'], function(){
     Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+    Route::get('account/orders', ['as' => 'account.orders', 'uses' => 'AccountController@orders']);
 });
-
+/*
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -65,3 +66,18 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+// Password routes...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+*/
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+Route::group(['prefix'=>'register', 'as'=>'register.'], function(){
+    Route::get('', ['as' => 'index', 'uses'=>'RegisterController@index']);
+    Route::post('store', ['as' => 'store', 'uses'=>'RegisterController@store']);
+    Route::post('address', ['as' => 'address', 'uses'=>'RegisterController@address']);
+});

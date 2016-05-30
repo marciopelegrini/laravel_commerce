@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call('UserTableSeed');
         $this->call('CategoryTableSeed');
         $this->call('ProductTableSeed');
+        $this->call('OrderStatusTableSeed');
     }
 }

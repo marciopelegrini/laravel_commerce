@@ -20,14 +20,26 @@ class UserTableSeed extends Seeder
             'name' => 'Marcio',
             'email' => 'marcio.pelegrini@gmail.com',
             'password' => Hash::make('123'),
-            'is_admin' => 1
+            'is_admin' => 1,
+            'cep' => "17013230",
+            'address' => "Rua teste",
+            'number' => "200",
+            'district' => "Redentor",
+            'city' => "Bauru",
+            'state' => "SP",
         ]);
 
         factory('CodeCommerce\User')->create([
             'name' => 'Juca',
             'email' => 'juca@gmail.com',
             'password' => Hash::make('123'),
-            'is_admin' => 0
+            'is_admin' => 0,
+            'cep' => "45690000",
+            'address' => "Rua teste",
+            'number' => "200",
+            'district' => "Centro",
+            'city' => "Arealva",
+            'state' => "RJ",
         ]);
 
         factory('CodeCommerce\User', 3)->create();
